@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <title>LoGk EG </title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Cairo', sans-serif;
+      background-color: #f5f5f5;
+      direction: rtl;
+    }
+
+    /* Header */
+    .header {
+      background-color: #000;
+      color: white;
+      padding: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .header img {
+      height: 25px;
+      cursor: pointer;
+    }
+
+    .balance-box {
+      background: linear-gradient(90deg, #f25c0e, #cf4114);
+      color: white;
+      padding: 15px;
+      text-align: center;
+      border-bottom-left-radius: 20px;
+      border-bottom-right-radius: 20px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 15px;
+      padding: 20px;
+    }
+
+    .grid-item {
+      background: white;
+      border-radius: 50%;
+      width: 90px;
+      height: 90px;
+      margin: auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 0 5px #ccc;
+      text-align: center;
+      font-size: 12px;
+      color: #c75311;
+      cursor: pointer;
+    }
+
+    .grid-item img {
+      width: 30px;
+      height: 30px;
+      margin-bottom: 5px;
+    }
+
+    .bottom-nav {
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      background: white;
+      display: flex;
+      justify-content: space-around;
+      border-top: 1px solid #ddd;
+      padding: 10px 0;
+    }
+
+    .bottom-nav-item {
+      text-align: center;
+      font-size: 10px;
+      color: #c75311;
+    }
+
+    .bottom-nav-item img {
+      width: 20px;
+      height: 20px;
+      margin-bottom: 5px;
+    }
+
+    /* Modal */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0; right: 0; bottom: 0; left: 0;
+      background-color: rgba(0,0,0,0.6);
+      justify-content: center;
+      align-items: center;
+      z-index: 100;
+    }
+
+    .modal-content {
+      background: white;
+      padding: 20px;
+      border-radius: 15px;
+      width: 80%;
+      max-width: 350px;
+      position: relative;
+      text-align: center;
+    }
+
+    .modal-content h3 {
+      margin-top: 0;
+    }
+
+    .close {
+      position: absolute;
+      top: 10px;
+      left: 15px;
+      font-size: 22px;
+      color: red;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <div class="header">
+    <img src="https://img.icons8.com/ios-filled/25/ffffff/instagram-new.png" alt="Instagram" onclick="window.open('https://www.instagram.com/', '_blank')">
+    <img src="https://via.placeholder.com/100x20?text=LoGk+EG" alt=" LoGk EG">
+    <img src="https://img.icons8.com/ios-filled/25/ffffff/youtube-play.png" alt="YouTube" onclick="window.open('https://www.youtube.com/', '_blank')">
+  </div>
+
+  <!-- Balance Box -->
+  <div class="balance-box">
+    <div style="font-size: 14px;">مرحبا بكم</div>
+    <div style="font-size: 18px; font-weight: bold;">خصم 10% علي جميع الخدمات</div>
+    <div>وفر 10% من قيمة المنتجات المعروضة ومتنساش تتابع العروض</div>
+    <div style="margin-top: 10px; font-size: 14px;">عميل رقم 7413</div>
+  </div>
+
+  <!-- Grid -->
+  <div class="grid">
+    <div class="grid-item" onclick="showDetails('فواتير', 'ادفع فواتيرك بسهولة!')">
+      <img src="https://img.icons8.com/ios/50/f25c0e/bill.png" alt="فواتير">
+      <div>فواتير</div>
+    </div>
+    <div class="grid-item" onclick="showDetails('كروت', 'كروت شحن بأنواع مختلفة!')">
+      <img src="https://img.icons8.com/ios/50/f25c0e/sim-card-chip.png" alt="كروت">
+      <div>كروت</div>
+    </div>
+    <div class="grid-item" onclick="showDetails('شحن رصيد', 'اشحن رصيدك في أي وقت')">
+      <img src="https://img.icons8.com/ios/50/f25c0e/money-transfer.png" alt="شحن رصيد">
+      <div>شحن رصيد</div>
+    </div>
+    <div class="grid-item" onclick="showDetails('خدمات تعليمية', 'خدمات للطلاب والمعلمين')">
+      <img src="https://img.icons8.com/ios/50/f25c0e/student-center.png" alt="تعليمية">
+      <div>خدمات تعليمية</div>
+    </div>
+   
+    <div class="grid-item" onclick="showDetails('مرافق عامة', 'كهرباء، مياه، غاز')">
+      <img src="https://img.icons8.com/ios/50/f25c0e/light-on.png" alt="مرافق">
+      <div>مرافق عامة</div>
+    </div>
+    <!-- باقي الخدمات -->
+<div class="grid-item" onclick="showDetails('التقسيط', 'نظام التقسيط المرن لجميع العملاء.')">
+  <img src="https://img.icons8.com/ios/50/f25c0e/percentage.png" alt="التقسيط">
+  <div>التقسيط</div>
+</div>
+
+<div class="grid-item" onclick="showDetails('خدمات أونلاين', 'خدمات شراء ودفع أونلاين متنوعة.')">
+  <img src="https://img.icons8.com/ios/50/f25c0e/shopping-cart.png" alt="اونلاين">
+  <div>خدمات اونلاين</div>
+</div>
+
+<div class="grid-item" onclick="showDetails('تبرعات', 'ساهم في الخير عبر التبرع للجهات الموثوقة.')">
+  <img src="https://img.icons8.com/ios/50/f25c0e/donate.png" alt="تبرعات">
+  <div>تبرعات</div>
+</div>
+
+<div class="grid-item" onclick="showDetails('خدمات كاش', 'اسحب أو أرسل أموال بسهولة.')">
+  <img src="https://img.icons8.com/ios/50/f25c0e/cash-in-hand.png" alt="كاش">
+  <div>خدمات كاش</div>
+</div>
+
+<div class="grid-item" onclick="showDetails('مواصلات', 'ادفع مواصلاتك بسهولة.')">
+  <img src="https://img.icons8.com/ios/50/f25c0e/bus.png" alt="مواصلات">
+  <div>مواصلات</div>
+</div>
+
+<div class="grid-item" onclick="showDetails('خدمات طبية', 'حجز واستشارات طبية أونلاين.')">
+  <img src="https://img.icons8.com/ios/50/f25c0e/stethoscope.png" alt="طبية">
+  <div>خدمات طبية</div>
+</div>
+
+<div class="grid-item" onclick="showDetails('قنوات واشتراكات', 'اشترك في القنوات المفضلة بسهولة.')">
+  <img src="https://img.icons8.com/ios/50/f25c0e/tv.png" alt="قنوات">
+  <div>قنوات</div>
+</div>
+
+  </div>
+
+  <!-- Modal -->
+  <div id="modal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal()">×</span>
+      <h3 id="modal-title"></h3>
+      <p id="modal-description"></p>
+    </div>
+  </div>
+
+ 
+
+  <script>
+    function showDetails(title, description) {
+      document.getElementById("modal-title").innerText = title;
+      document.getElementById("modal-description").innerText = description;
+      document.getElementById("modal").style.display = "flex";
+    }
+
+    function closeModal() {
+      document.getElementById("modal").style.display = "none";
+    }
+
+    window.onclick = function(event) {
+      const modal = document.getElementById("modal");
+      if (event.target == modal) {
+        modal.style.display = "none";
+      }
+    }
+  </script>
+
+</body>
+</html>
